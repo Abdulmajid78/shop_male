@@ -7,7 +7,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Our Blog</h2>
+                    {% if tag %}
+                    <h2>#{{ tag.name }}</h2>
+                        <h4><a href="{% url 'blogs:list' %} " class="text-white">back</a></h4>
+                    {% else %}
+                        <h2>Our Blog</h2>
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>
