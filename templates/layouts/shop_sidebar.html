@@ -1,0 +1,112 @@
+<div class="shop__sidebar">
+    <div class="shop__sidebar__search">
+        <form action="{% url 'products:all' %}">
+            <input type="text" placeholder="Search..." value="{{ request.GET.q }}" name="q">
+            <button type="submit"><span class="icon_search"></span></button>
+        </form>
+    </div>
+    <div class="shop__sidebar__accordion">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__categories">
+                            <ul class="nice-scroll">
+                                {% for category in categories %}
+                                    <li>
+                                        <a class="{% if category.id|stringformat:'i' == request.GET.cat %}text-dark{% endif %}"
+                                           onclick="addSearchParam('cat', {{ category.id }})"
+                                           href="#">{{ category.name }}
+                                            ({{ category.products.count }})</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                </div>
+                <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__brand">
+                            <ul>
+                                {% for brand in brands %}
+                                    <li>
+                                        <a class="{% if brand.id|stringformat:'i' == request.GET.brand %}text-dark{% endif %}"
+                                           onclick="addSearchParam('brand', {{ brand.id }})"
+                                           href="#">{{ brand.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                </div>
+                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__price">
+                            <input type="text" class="js-range-slider" name="my_range" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseFour">Size</a>
+                </div>
+                <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__tags">
+                            {% for size in sizes %}
+                                <a class="{% if size.id|stringformat:'i' == request.GET.size %} bg-dark text-white {% endif %}"
+                                   onclick="addSearchParam('size', {{ size.id }})" href="#">{{ size.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
+                </div>
+                <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__color">
+                            {% for color in colors %}
+                                <a href="#" onclick="addSearchParam('color', {{ color.id }})">
+                                <label style="background-color: {{ color.code }}" for="sp-1">
+
+                                </label>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
+                </div>
+                <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="shop__sidebar__tags">
+                            {% for tag in tags %}
+                                <a class="{% if tag.id|stringformat:'i' == request.GET.tag %} bg-dark text-white {% endif %}"
+                                   onclick="addSearchParam('tag', {{ tag.id }})" href="#">{{ tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

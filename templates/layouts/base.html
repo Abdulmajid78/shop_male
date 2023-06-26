@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{% static 'main/css/owl.carousel.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'main/css/slicknav.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}" type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
 </head>
 
 <body>
@@ -42,8 +44,8 @@
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
+        <form class="search-model-form" action="{% url 'products:all' %}">
+            <input name="q" value="{{ request.GET.q }}" type="text" id="search-input" placeholder="Search here.....">
         </form>
     </div>
 </div>
@@ -51,6 +53,8 @@
 
 <!-- Js Plugins -->
 <script src="{% static 'main/js/jquery-3.3.1.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'main/js/jquery.nice-select.min.js' %}"></script>
 <script src="{% static 'main/js/jquery.nicescroll.min.js' %}"></script>
@@ -60,6 +64,10 @@
 <script src="{% static 'main/js/mixitup.min.js' %}"></script>
 <script src="{% static 'main/js/owl.carousel.min.js' %}"></script>
 <script src="{% static 'main/js/main.js' %}"></script>
+
+
+{% block extra_js %}
+{% endblock %}
 </body>
 
 </html>
